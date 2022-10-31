@@ -8,7 +8,7 @@ const Auth = async (req, res, next) =>{
     try {
         const decoded = jwt.verify(token, secret)
         if(decoded && decoded.id){
-            const user = await User.findOne({_id: decoded.id}, {password: 0, __v: 0});
+            const user = await User.findOne({_id: decoded.id}, {password: 0, __v: 0}).lean();
             req.user = user
         }
         next()
