@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 module.exports = {
     http_method: "post",
     route: "/register",
@@ -5,7 +6,7 @@ module.exports = {
     handler:
         async (req, res) => {
             const User = require('../models/User')
-            const bcrypt = require('bcrypt')
+            
             const { name, username, password, cpf } = req.body
             const DUPLICATE_ERROR_CODE = 11000;
 

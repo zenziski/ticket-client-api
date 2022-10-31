@@ -19,5 +19,5 @@ routes.forEach(i => {
     } = require(i)
     app[http_method](route, ...middleware, handler);
 })
-
+console.log(`${routes.length} rotas mapeadas`)
 module.exports = app;

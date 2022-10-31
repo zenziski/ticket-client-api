@@ -11,7 +11,7 @@ module.exports = {
         const userId = req.params.id;
         if (!userId) return res.status(400).json({ message: "Usuário não encontrado" });
 
-        if (req.body.password) {
+        if (req.body.password) { //se o body possuir o parametro password, é necessario criptografar a senha.
             const password = req.body.password;
             const salt = await bcrypt.genSalt(12)
             const passwordHash = await bcrypt.hash(password, salt);

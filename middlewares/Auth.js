@@ -1,14 +1,15 @@
 const jwt = require('jsonwebtoken')
 const secret = process.env.JWT_SECRET
-const Auth = (req, res, next) =>{
+const User = require('../models/User')
+const Auth = async (req, res, next) =>{
     let token = null;
     if (req.headers.authorization && req.headers.authorization.split(' ')[0].toLocaleLowerCase() === 'bearer') 
         token = req.headers.authorization.split(' ')[1];
     try {
-        const data = jwt.verify(token, secret)
-        req.user = {
-            username: data.username,
-            accessLevel: data.access_level
+        const decoded = jwt.verify(token, secret)
+        if(decoded && decoded.id){
+            const user = await User.findOne({_id: decoded.id}, {password: 0, __v: 0});
+            req.user = user
         }
         next()
     } catch (error) {
