@@ -23,7 +23,7 @@ module.exports = {
                 return res.json({ message: "Usuário criado com sucesso!", user })
             } catch (error) {
                 console.log(error);
-                if (error.code === DUPLICATE_ERROR_CODE) return res.status(400).json({ message: "Já existe um usuário com esse login" })
+                if (error.code === DUPLICATE_ERROR_CODE) return res.status(400).json({ message: "Já existe um usuário com esse login ou CPF" })
                 return res.status(400).json('ocorreu um erro')
             }
         }
